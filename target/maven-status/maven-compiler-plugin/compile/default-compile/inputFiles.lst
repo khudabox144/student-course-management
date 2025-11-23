@@ -7,6 +7,7 @@ D:\cs\2-2\student-course-management\src\main\java\com\scms\controller\DeleteCour
 D:\cs\2-2\student-course-management\src\main\java\com\scms\controller\EnrollCourseServlet.java
 D:\cs\2-2\student-course-management\src\main\java\com\scms\controller\HelloServlet.java
 D:\cs\2-2\student-course-management\src\main\java\com\scms\controller\LoginServlet.java
+D:\cs\2-2\student-course-management\src\main\java\com\scms\controller\RegisterServlet.java
 D:\cs\2-2\student-course-management\src\main\java\com\scms\controller\StudentDashboardServlet.java
 D:\cs\2-2\student-course-management\src\main\java\com\scms\controller\TeacherDashboardServlet.java
 D:\cs\2-2\student-course-management\src\main\java\com\scms\controller\TestDbServlet.java

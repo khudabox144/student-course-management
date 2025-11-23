@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
                     resp.sendRedirect("teacher/dashboard");
                     break;
                 case "admin":
-                    resp.sendRedirect("admin/dashboard");
+                    resp.sendRedirect("admin/dashboard.jsp");
                     break;
                 default:
                     resp.sendRedirect("login");

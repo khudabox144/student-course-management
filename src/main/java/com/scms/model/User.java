@@ -15,11 +15,12 @@ public class User {
 
     public User() {}
 
-    public User(String username, String password, String role, String fullName) {
+    // Fixed constructor: matches servlet registration order
+    public User(String fullName, String username, String password, String role) {
+        this.fullName = fullName;
         this.username = username;
         this.password = password;
         this.role = role;
-        this.fullName = fullName;
     }
 
     // Getters and Setters

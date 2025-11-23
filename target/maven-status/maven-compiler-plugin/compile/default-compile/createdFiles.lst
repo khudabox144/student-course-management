@@ -11,6 +11,7 @@ com\scms\controller\DeleteCourseServlet.class
 com\scms\dao\UserDAO.class
 com\scms\model\Course.class
 com\scms\controller\LoginServlet.class
+com\scms\controller\RegisterServlet.class
 com\scms\config\MongoConfig.class
 com\scms\model\Enrollment.class
 com\scms\model\User.class

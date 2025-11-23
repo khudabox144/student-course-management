@@ -1,14 +1,11 @@
 package com.scms.dao;
 
 import org.bson.Document;
-
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
 import com.scms.config.MongoConfig;
 import com.scms.model.User;
-
-
 
 /*
  This class handles all database operations related to User.
@@ -23,8 +20,13 @@ public class UserDAO {
         usersCollection = db.getCollection("users"); // "users" collection
     }
 
-    // Create a new user
-    public void createUser(User user) {
+    // Create a new user (only if username doesn't exist)
+    public boolean createUser(User user) {
+        if(findByUsername(user.getUsername()) != null) {
+            // Username already exists
+            return false;
+        }
+
         Document doc = new Document();
         doc.append("username", user.getUsername());
         doc.append("password", user.getPassword());
@@ -32,6 +34,7 @@ public class UserDAO {
         doc.append("fullName", user.getFullName());
         usersCollection.insertOne(doc);
         user.setId(doc.getObjectId("_id")); // set id after insert
+        return true;
     }
 
     // Find user by username
@@ -47,5 +50,4 @@ public class UserDAO {
         user.setFullName(doc.getString("fullName"));
         return user;
     }
-
 }
