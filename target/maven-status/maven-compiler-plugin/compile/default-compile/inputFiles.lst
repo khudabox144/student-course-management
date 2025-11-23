@@ -4,6 +4,7 @@ D:\cs\2-2\student-course-management\src\main\java\com\scms\controller\AddCourseS
 D:\cs\2-2\student-course-management\src\main\java\com\scms\controller\AdminDashboardServlet.java
 D:\cs\2-2\student-course-management\src\main\java\com\scms\controller\AdminTestServlet.java
 D:\cs\2-2\student-course-management\src\main\java\com\scms\controller\DeleteCourseServlet.java
+D:\cs\2-2\student-course-management\src\main\java\com\scms\controller\EnrollCourseServlet.java
 D:\cs\2-2\student-course-management\src\main\java\com\scms\controller\HelloServlet.java
 D:\cs\2-2\student-course-management\src\main\java\com\scms\controller\LoginServlet.java
 D:\cs\2-2\student-course-management\src\main\java\com\scms\controller\StudentDashboardServlet.java
@@ -11,6 +12,8 @@ D:\cs\2-2\student-course-management\src\main\java\com\scms\controller\TeacherDas
 D:\cs\2-2\student-course-management\src\main\java\com\scms\controller\TestDbServlet.java
 D:\cs\2-2\student-course-management\src\main\java\com\scms\controller\TestUserDAO.java
 D:\cs\2-2\student-course-management\src\main\java\com\scms\dao\CourseDAO.java
+D:\cs\2-2\student-course-management\src\main\java\com\scms\dao\EnrollmentDAO.java
 D:\cs\2-2\student-course-management\src\main\java\com\scms\dao\UserDAO.java
 D:\cs\2-2\student-course-management\src\main\java\com\scms\model\Course.java
+D:\cs\2-2\student-course-management\src\main\java\com\scms\model\Enrollment.java
 D:\cs\2-2\student-course-management\src\main\java\com\scms\model\User.java

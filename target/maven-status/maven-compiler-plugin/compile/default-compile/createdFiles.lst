@@ -2,6 +2,7 @@ com\scms\dao\CourseDAO.class
 com\scms\controller\AddCourseServlet.class
 com\scms\controller\TestUserDAO.class
 com\scms\controller\AdminTestServlet.class
+com\scms\controller\EnrollCourseServlet.class
 com\scms\controller\TeacherDashboardServlet.class
 com\scms\controller\AdminDashboardServlet.class
 com\scms\controller\TestDbServlet.class
@@ -11,6 +12,8 @@ com\scms\dao\UserDAO.class
 com\scms\model\Course.class
 com\scms\controller\LoginServlet.class
 com\scms\config\MongoConfig.class
+com\scms\model\Enrollment.class
 com\scms\model\User.class
 com\scms\controller\HelloServlet.class
 com\scms\controller\StudentDashboardServlet.class
+com\scms\dao\EnrollmentDAO.class
