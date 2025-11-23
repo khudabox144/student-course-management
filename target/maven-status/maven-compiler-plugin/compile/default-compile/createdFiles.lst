@@ -1,0 +1,16 @@
+com\scms\dao\CourseDAO.class
+com\scms\controller\AddCourseServlet.class
+com\scms\controller\TestUserDAO.class
+com\scms\controller\AdminTestServlet.class
+com\scms\controller\TeacherDashboardServlet.class
+com\scms\controller\AdminDashboardServlet.class
+com\scms\controller\TestDbServlet.class
+com\scms\config\MongoTestMain.class
+com\scms\controller\DeleteCourseServlet.class
+com\scms\dao\UserDAO.class
+com\scms\model\Course.class
+com\scms\controller\LoginServlet.class
+com\scms\config\MongoConfig.class
+com\scms\model\User.class
+com\scms\controller\HelloServlet.class
+com\scms\controller\StudentDashboardServlet.class
