@@ -25,25 +25,37 @@
 <html>
 <head>
     <title>Teacher Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h2>Welcome, <%= user.getFullName() %>!</h2>
+<body class="min-h-screen bg-gray-100">
+    <div class="max-w-4xl mx-auto p-6">
+        <div class="bg-white shadow rounded-lg p-6 mb-6">
+            <h2 class="text-2xl font-semibold">Welcome, <%= user.getFullName() %>!</h2>
+            <p class="text-sm text-gray-600 mt-1">Overview of your courses and enrolled students.</p>
+        </div>
 
-    <h3>My Courses and Enrolled Students</h3>
-    <% for(Course c : myCourses){ %>
-        <h4><%= c.getCourseName() %></h4>
-        <ul>
-            <%
-                List<String> students = enrollmentDAO.getStudentsByCourse(c.getId());
-                if(students.isEmpty()){
-                    out.println("<li>No students enrolled yet</li>");
-                } else {
-                    for(String s : students){
-                        out.println("<li>" + s + "</li>");
-                    }
-                }
-            %>
-        </ul>
-    <% } %>
+        <div class="space-y-6">
+            <h3 class="text-xl font-semibold">My Courses and Enrolled Students</h3>
+            <% for(Course c : myCourses){ %>
+                <div class="bg-white shadow rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="text-lg font-medium"><%= c.getCourseName() %></h4>
+                    </div>
+                    <ul class="list-disc pl-5 text-gray-800">
+                        <%
+                            List<String> students = enrollmentDAO.getStudentsByCourse(c.getId());
+                            if(students.isEmpty()){
+                                out.println("<li>No students enrolled yet</li>");
+                            } else {
+                                for(String s : students){
+                                    out.println("<li>" + s + "</li>");
+                                }
+                            }
+                        %>
+                    </ul>
+                </div>
+            <% } %>
+        </div>
+    </div>
 </body>
 </html>

@@ -1,18 +1,34 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login - Student Course Management</title>
+    <title>Login - SCMS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h2>Login</h2>
-    <form action="login" method="post">
-        Username: <input type="text" name="username" required/><br/><br/>
-        Password: <input type="password" name="password" required/><br/><br/>
-        <input type="submit" value="Login"/>
-    </form>
-    <p style="color:red;">
-        <% String error = (String) request.getAttribute("error"); 
-           if(error != null){ out.print(error); } %>
-    </p>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+<div class="w-full max-w-md mx-4">
+    <div class="bg-white shadow rounded-lg overflow-hidden">
+        <div class="px-6 py-4 bg-blue-600 text-white text-center">
+            <h3 class="text-xl font-semibold">Login</h3>
+        </div>
+        <div class="p-6">
+            <form action="login" method="post">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Username</label>
+                    <input type="text" name="username" class="mt-1 block w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" name="password" class="mt-1 block w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <div>
+                    <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">Login</button>
+                </div>
+            </form>
+            <p class="mt-4 text-sm text-center">Don't have an account? <a href="register.jsp" class="text-blue-600 hover:underline">Register here</a></p>
+        </div>
+    </div>
+</div>
 </body>
 </html>
+
