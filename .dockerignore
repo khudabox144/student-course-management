@@ -1,0 +1,6 @@
+target/*.jar
+target/*.war
+*.git
+*.idea
+*.vscode
+.env
