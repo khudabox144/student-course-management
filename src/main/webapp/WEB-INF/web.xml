@@ -8,4 +8,9 @@
 
     <display-name>student-course-management</display-name>
 
+    <!-- Set the login page as the first page -->
+    <welcome-file-list>
+        <welcome-file>login.jsp</welcome-file>
+    </welcome-file-list>
+
 </web-app>
