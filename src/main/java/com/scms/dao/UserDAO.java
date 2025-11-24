@@ -1,29 +1,28 @@
 package com.scms.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bson.Document;
+
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
 import com.scms.config.MongoConfig;
 import com.scms.model.User;
 
-/*
- This class handles all database operations related to User.
- It hides MongoDB implementation from the rest of the app.
-*/
 public class UserDAO {
 
     private MongoCollection<Document> usersCollection;
 
     public UserDAO() {
         MongoDatabase db = MongoConfig.getDatabase();
-        usersCollection = db.getCollection("users"); // "users" collection
+        usersCollection = db.getCollection("users");
     }
 
-    // Create a new user (only if username doesn't exist)
+    // Create a new user
     public boolean createUser(User user) {
-        if(findByUsername(user.getUsername()) != null) {
-            // Username already exists
+        if (findByUsername(user.getUsername()) != null) {
             return false;
         }
 
@@ -32,8 +31,9 @@ public class UserDAO {
         doc.append("password", user.getPassword());
         doc.append("role", user.getRole());
         doc.append("fullName", user.getFullName());
+
         usersCollection.insertOne(doc);
-        user.setId(doc.getObjectId("_id")); // set id after insert
+        user.setId(doc.getObjectId("_id"));
         return true;
     }
 
@@ -48,6 +48,24 @@ public class UserDAO {
         user.setPassword(doc.getString("password"));
         user.setRole(doc.getString("role"));
         user.setFullName(doc.getString("fullName"));
+
         return user;
+    }
+
+    // ⭐ NEW METHOD — FETCH TEACHERS ONLY
+    public List<User> getAllTeachers() {
+        List<User> teachers = new ArrayList<>();
+
+        for (Document doc : usersCollection.find(eq("role", "teacher"))) {
+            User user = new User();
+            user.setId(doc.getObjectId("_id"));
+            user.setUsername(doc.getString("username"));
+            user.setPassword(doc.getString("password"));
+            user.setRole(doc.getString("role"));
+            user.setFullName(doc.getString("fullName"));
+            teachers.add(user);
+        }
+
+        return teachers;
     }
 }
