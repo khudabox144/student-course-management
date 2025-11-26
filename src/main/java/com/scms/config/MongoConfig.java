@@ -7,23 +7,32 @@ import com.mongodb.client.MongoDatabase;
 public class MongoConfig {
 
     private static MongoClient client;
+    private static final String DB_NAME;
+
+    static {
+        // Initialize environment variables at class load time
+        String uri = System.getenv("MONGO_URI");
+        String tmpDbName = System.getenv("DB_NAME");
+        DB_NAME = tmpDbName;
+
+        if (uri != null && !uri.isEmpty() && DB_NAME != null && !DB_NAME.isEmpty()) {
+            try {
+                client = MongoClients.create(uri);
+            } catch (Exception e) {
+                System.err.println("Failed to initialize MongoDB client: " + e.getMessage());
+            }
+        }
+    }
 
     public static MongoDatabase getDatabase() {
         if (client == null) {
-            // Read environment variables
-            String uri = System.getenv("MONGO_URI");
-            String dbName = System.getenv("DB_NAME");
-
-            if (uri == null || uri.isEmpty() || dbName == null || dbName.isEmpty()) {
-                throw new RuntimeException("Environment variables MONGO_URI or DB_NAME not set!");
-            }
-
-            client = MongoClients.create(uri);
-            return client.getDatabase(dbName);
+            throw new RuntimeException("MongoDB client not initialized. Please set MONGO_URI and DB_NAME environment variables.");
         }
+        return client.getDatabase(DB_NAME);
+    }
 
-        String dbName = System.getenv("DB_NAME");
-        return client.getDatabase(dbName);
+    public static boolean isConnected() {
+        return client != null;
     }
 
 }

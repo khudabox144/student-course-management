@@ -16,8 +16,16 @@ public class UserDAO {
     private MongoCollection<Document> usersCollection;
 
     public UserDAO() {
-        MongoDatabase db = MongoConfig.getDatabase();
-        usersCollection = db.getCollection("users");
+        // Initialize lazily on first use
+        usersCollection = null;
+    }
+
+    private MongoCollection<Document> getCollection() {
+        if (usersCollection == null) {
+            MongoDatabase db = MongoConfig.getDatabase();
+            usersCollection = db.getCollection("users");
+        }
+        return usersCollection;
     }
 
     // Create a new user
@@ -32,14 +40,14 @@ public class UserDAO {
         doc.append("role", user.getRole());
         doc.append("fullName", user.getFullName());
 
-        usersCollection.insertOne(doc);
+        getCollection().insertOne(doc);
         user.setId(doc.getObjectId("_id"));
         return true;
     }
 
     // Find user by username
     public User findByUsername(String username) {
-        Document doc = usersCollection.find(eq("username", username)).first();
+        Document doc = getCollection().find(eq("username", username)).first();
         if (doc == null) return null;
 
         User user = new User();
@@ -56,7 +64,7 @@ public class UserDAO {
     public List<User> getAllTeachers() {
         List<User> teachers = new ArrayList<>();
 
-        for (Document doc : usersCollection.find(eq("role", "teacher"))) {
+        for (Document doc : getCollection().find(eq("role", "teacher"))) {
             User user = new User();
             user.setId(doc.getObjectId("_id"));
             user.setUsername(doc.getString("username"));
