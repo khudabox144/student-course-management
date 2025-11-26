@@ -30,17 +30,22 @@ public class MongoConfig {
         String uri = System.getenv("MONGO_URI");
         dbName = System.getenv("DB_NAME");
 
+        System.out.println("=== MongoDB Initialization ===");
+        System.out.println("MONGO_URI from env: " + uri);
+        System.out.println("DB_NAME from env: " + dbName);
+
         if (uri != null && !uri.isEmpty() && dbName != null && !dbName.isEmpty()) {
             try {
                 client = MongoClients.create(uri);
                 System.out.println("MongoDB client initialized successfully.");
             } catch (Exception e) {
                 System.err.println("Failed to initialize MongoDB client: " + e.getMessage());
-                e.printStackTrace();
+                System.err.println("Exception type: " + e.getClass().getName());
             }
         } else {
-            System.err.println("MONGO_URI: " + uri);
-            System.err.println("DB_NAME: " + dbName);
+            System.err.println("Environment variables not set or empty!");
+            System.err.println("MONGO_URI is " + (uri == null ? "null" : (uri.isEmpty() ? "empty" : "set")));
+            System.err.println("DB_NAME is " + (dbName == null ? "null" : (dbName.isEmpty() ? "empty" : "set")));
         }
 
         initialized = true;
