@@ -7,31 +7,49 @@ import com.mongodb.client.MongoDatabase;
 public class MongoConfig {
 
     private static MongoClient client;
-    private static final String DB_NAME;
-
-    static {
-        // Initialize environment variables at class load time
-        String uri = System.getenv("MONGO_URI");
-        String tmpDbName = System.getenv("DB_NAME");
-        DB_NAME = tmpDbName;
-
-        if (uri != null && !uri.isEmpty() && DB_NAME != null && !DB_NAME.isEmpty()) {
-            try {
-                client = MongoClients.create(uri);
-            } catch (Exception e) {
-                System.err.println("Failed to initialize MongoDB client: " + e.getMessage());
-            }
-        }
-    }
+    private static String dbName;
+    private static boolean initialized = false;
 
     public static MongoDatabase getDatabase() {
+        if (!initialized) {
+            initialize();
+        }
+
         if (client == null) {
             throw new RuntimeException("MongoDB client not initialized. Please set MONGO_URI and DB_NAME environment variables.");
         }
-        return client.getDatabase(DB_NAME);
+
+        return client.getDatabase(dbName);
+    }
+
+    private static synchronized void initialize() {
+        if (initialized) {
+            return;
+        }
+
+        String uri = System.getenv("MONGO_URI");
+        dbName = System.getenv("DB_NAME");
+
+        if (uri != null && !uri.isEmpty() && dbName != null && !dbName.isEmpty()) {
+            try {
+                client = MongoClients.create(uri);
+                System.out.println("MongoDB client initialized successfully.");
+            } catch (Exception e) {
+                System.err.println("Failed to initialize MongoDB client: " + e.getMessage());
+                e.printStackTrace();
+            }
+        } else {
+            System.err.println("MONGO_URI: " + uri);
+            System.err.println("DB_NAME: " + dbName);
+        }
+
+        initialized = true;
     }
 
     public static boolean isConnected() {
+        if (!initialized) {
+            initialize();
+        }
         return client != null;
     }
 
